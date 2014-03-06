@@ -54,7 +54,7 @@ class TimeReportsQuery < TimeEntryQuery
       where(statement).
       order(order_option).
       joins(joins_for_order_statement(order_option.join(','))).
-      joins(:project).
+      joins(:project, :issue).
       includes(:activity)
   end
 
