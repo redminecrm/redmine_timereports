@@ -1,0 +1,5 @@
+# English strings go here for Rails i18n
+ru:
+  label_timereport_plural: Отчет
+  label_timereport: Отчет временных затрат
+  label_timereport_group: "Группа пользователя"

@@ -1,0 +1,5 @@
+# English strings go here for Rails i18n
+en:
+  label_timereport_plural: Time reports
+  label_timereport: Time report
+  label_timereport_group: "User's group"
