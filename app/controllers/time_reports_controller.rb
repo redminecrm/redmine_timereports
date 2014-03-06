@@ -1,6 +1,8 @@
-class TimereportsController < ApplicationController
+class TimeReportsController < ApplicationController
   unloadable
   rescue_from Query::StatementInvalid, :with => :query_statement_invalid
+
+  before_filter :authorize_timereport
 
   helper :sort
   include SortHelper
@@ -26,8 +28,10 @@ class TimereportsController < ApplicationController
 private
 
   def authorize_timereport
-    unless User.current.logged?
-
+     return true if User.current.admin?
+     access_group = Group.where(:id => Setting.plugin_redmine_timereports['access_group']).first
+     allow_access =  User.current.admin? || User.current.groups.include?(access_group)
+     deny_access unless allow_access
   end
 
 end

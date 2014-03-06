@@ -1,0 +1,7 @@
+<p>
+  <label><%= l(:label_timereports_access_group) %>:</label>
+  <%= select_tag('settings[access_group]',
+                                 options_for_select([''] + Group.find(:all).collect{|u| [u.name, u.id] },
+                                                                @settings['access_group'].to_i)
+                                )%>
+</p>
