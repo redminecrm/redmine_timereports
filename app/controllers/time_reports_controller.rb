@@ -16,8 +16,7 @@ class TimeReportsController < ApplicationController
 
   def report
     @query = TimeReportsQuery.build_from_params(params, :name => '_')
-
-    @report = Redmine::Helpers::TimeReport.new(nil, nil, params[:criteria], params[:columns], @query.results_scope)
+    @report = RedmineTimeReports::Patches::TimeReport.new(nil, nil, params[:criteria], params[:columns], @query.results_scope)
 
     respond_to do |format|
       format.html { render :layout => !request.xhr? }
