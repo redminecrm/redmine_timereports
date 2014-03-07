@@ -1,3 +1,5 @@
+require 'redmine_timereports'
+
 Redmine::Plugin.register :redmine_timereports do
   name 'Redmine Timereports plugin'
   author 'RedmineCRM'
@@ -12,6 +14,7 @@ Redmine::Plugin.register :redmine_timereports do
 
   menu :top_menu, :timereports,
                           {:controller => 'time_reports', :action => 'report'},
-                          :caption => :label_timereport_plural
+                          :caption => :label_timereport_plural,
+                          :if => RedmineTimeReports.allow_reports?
 
 end

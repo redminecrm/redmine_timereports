@@ -28,10 +28,7 @@ class TimeReportsController < ApplicationController
 private
 
   def authorize_timereport
-     return true if User.current.admin?
-     access_group = Group.where(:id => Setting.plugin_redmine_timereports['access_group']).first
-     allow_access =  User.current.admin? || User.current.groups.include?(access_group)
-     deny_access unless allow_access
+     deny_access unless RedmineTimeReports.allow_reports?
   end
 
 end
