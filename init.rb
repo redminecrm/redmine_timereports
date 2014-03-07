@@ -15,6 +15,6 @@ Redmine::Plugin.register :redmine_timereports do
   menu :top_menu, :timereports,
                           {:controller => 'time_reports', :action => 'report'},
                           :caption => :label_timereport_plural,
-                          :if => RedmineTimeReports.allow_reports?
+                          :if => Proc.new { RedmineTimeReports.allow_reports? }
 
 end
