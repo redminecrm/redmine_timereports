@@ -4,6 +4,15 @@ class TimeReportsQuery < TimeEntryQuery
   def initialize_available_filters
     add_available_filter "spent_on", :type => :date_past
 
+    project_values = []
+    if User.current.logged? && User.current.memberships.any?
+      project_values << ["<< #{l(:label_my_projects).downcase} >>", "mine"]
+    end
+    project_values += all_projects_values
+    add_available_filter("project_id",
+      :type => :list, :values => project_values
+    ) unless project_values.empty?
+
     users_values = []
     users_values << ["<< #{l(:label_me)} >>", "me"] if User.current.logged?
     users_values += User.logged.active.sorted.collect{|s| [s.name, s.id.to_s] }
